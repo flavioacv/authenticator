@@ -12,6 +12,7 @@ final themeData = ThemeData(
       white: Colors.white,
       green: Color(0xFF44BD6E),
       darkGreen: Color(0xFF1E4D5F),
+      greenLight: Color(0xFF2B9690),
     ),
   ],
 );

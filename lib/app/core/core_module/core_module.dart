@@ -6,22 +6,17 @@ import 'package:dio/dio.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class CoreModule extends Module {
   @override
   void exportedBinds(Injector i) {
     i.add<Dio>(
       () => Dio(
         BaseOptions(
-          baseUrl: 'http://localhost:8080/',
+          baseUrl: 'http://192.168.3.22:8080/',
         ),
       ),
     );
 
-    i.add<SharedPreferences>(
-      () async => await SharedPreferences.getInstance(),
-    );
     i.add<LocalStorageService>(LocalStorageServiceImpl.new);
 
     i.add<HttpClientService>(HttpClientDioServiceImpl.new);

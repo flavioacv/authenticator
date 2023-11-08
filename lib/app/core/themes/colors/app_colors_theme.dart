@@ -11,6 +11,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   final Color black;
   final Color white;
   final Color green;
+  final Color greenLight;
   final Color darkGreen;
 
   const AppColorsTheme({
@@ -18,6 +19,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     required this.white,
     required this.green,
     required this.darkGreen,
+    required this.greenLight,
   });
 
   @override
@@ -26,12 +28,14 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     Color? white,
     Color? green,
     Color? darkGreen,
+    Color? greenLight,
   }) {
     return AppColorsTheme(
       black: black ?? this.black,
       white: white ?? this.white,
       green: green ?? this.green,
       darkGreen: darkGreen ?? this.darkGreen,
+      greenLight: greenLight ?? this.greenLight,
     );
   }
 
@@ -56,6 +60,11 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       darkGreen: Color.lerp(
         darkGreen,
         other?.darkGreen,
+        t,
+      )!,
+      greenLight: Color.lerp(
+        greenLight,
+        other?.greenLight,
         t,
       )!,
     );
