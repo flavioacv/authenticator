@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'core/themes/theme_data.dart';
 
@@ -12,6 +13,12 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
+  @override
+  void didChangeDependencies() {
+    FlutterNativeSplash.remove();
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -28,6 +35,7 @@ class _AppWidgetState extends State<AppWidget> {
     );
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: Modular.routerConfig,
       theme: themeData,
     );
