@@ -1,6 +1,7 @@
 import 'package:authenticator/app/core/themes/extensions/color_theme_extension.dart';
 import 'package:authenticator/app/core/themes/extensions/responsive_extension.dart';
 import 'package:authenticator/app/core/types/type.dart';
+import 'package:authenticator/app/core/value_objects/user.dart';
 import 'package:authenticator/app/core/widgets/button_widget.dart';
 import 'package:authenticator/app/core/widgets/loading_widget.dart';
 import 'package:authenticator/app/core/widgets/text_field_widget.dart';
@@ -60,6 +61,7 @@ class SignInCardWidget extends StatelessWidget {
                         bottom: 8.0.w,
                       ),
                       child: TextFieldWidget(
+                        textAlign: TextAlign.start,
                         controller: userTextEditingController,
                         label: Padding(
                           padding: const EdgeInsets.only(left: 10),
@@ -72,9 +74,7 @@ class SignInCardWidget extends StatelessWidget {
                         ),
                         onChanged: onUserChanged,
                         validator: (value) {
-                          return (value?.isEmpty ?? false)
-                              ? 'Campo obrigatório'
-                              : null;
+                          return User(value!).isValidUser;
                         },
                         prefixIcon: Icon(
                           Icons.person_2_rounded,
@@ -84,6 +84,7 @@ class SignInCardWidget extends StatelessWidget {
                       ),
                     ),
                     TextFieldWidget(
+                      textAlign: TextAlign.start,
                       controller: passwordTextEditingController,
                       osbscureText: true,
                       label: Padding(

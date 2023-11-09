@@ -1,7 +1,8 @@
-import 'package:authenticator/app/core/navigation/navigation_service.dart';
+import 'package:authenticator/app/core/services/launch/launch_service.dart';
 import 'package:authenticator/app/core/themes/extensions/color_theme_extension.dart';
 import 'package:authenticator/app/core/themes/extensions/responsive_extension.dart';
 import 'package:authenticator/app/core/value_objects/password.dart';
+import 'package:authenticator/app/core/value_objects/user.dart';
 import 'package:authenticator/app/core/widgets/text_widget.dart';
 import 'package:authenticator/app/modules/sign_in/interactor/controllers/sign_in_mobx.dart';
 import 'package:authenticator/app/modules/sign_in/interactor/state/sign_in_state.dart';
@@ -12,10 +13,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 class SignInPage extends StatefulWidget {
   final SignInMobx signInController;
+  final LaunchService launchService;
 
   const SignInPage({
     super.key,
     required this.signInController,
+    required this.launchService,
   });
 
   @override
@@ -25,6 +28,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final passwordTextEditingController = TextEditingController();
   final userTextEditingController = TextEditingController();
+  final formGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +68,15 @@ class _SignInPageState extends State<SignInPage> {
                           passwordTextEditingController,
                       userTextEditingController: userTextEditingController,
                       onUserChanged: (value) =>
-                          widget.signInController.setEmail(value),
+                          widget.signInController.setUser(User(value)),
                       onPasswordChanged: (value) =>
                           widget.signInController.setPassword(Password(value)),
                       isLoading: state.status == SignInStateStatus.loading,
-                      onEnterPressed: widget.signInController.doSignIn,
+                      onEnterPressed:
+                          state.status == SignInStateStatus.loading ||
+                                  !widget.signInController.signInModel.isValid
+                              ? () => setState(() {})
+                              : widget.signInController.doSignIn,
                     ),
                     const Expanded(child: SizedBox()),
                     Padding(
@@ -77,10 +85,8 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       child: TextButton(
                         onPressed: () {
-                          // NavigationService.navigate(
-                          //   context: context,
-                          //   route: '/forgot_password/',
-                          // );
+                          widget.launchService
+                              .launchWeb(url: 'http://www.google.com.br');
                         },
                         child: TextWidget(
                           'Política de privacidade',

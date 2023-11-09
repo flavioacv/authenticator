@@ -1,11 +1,12 @@
 import 'package:authenticator/app/core/value_objects/password.dart';
+import 'package:authenticator/app/core/value_objects/user.dart';
 
 class SignInModel {
-  final String user;
+  final User user;
   final Password password;
 
   bool get isValid {
-    return user.isNotEmpty && password.isValid;
+    return user.isValid && password.isValid;
   }
 
   const SignInModel({
@@ -15,13 +16,13 @@ class SignInModel {
 
   factory SignInModel.empty() {
     return const SignInModel(
-      user: '',
+      user: User(''),
       password: Password(''),
     );
   }
 
   SignInModel copyWith({
-    String? user,
+    User? user,
     Password? password,
   }) {
     return SignInModel(

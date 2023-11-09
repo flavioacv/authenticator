@@ -1,4 +1,5 @@
 import 'package:authenticator/app/core/value_objects/password.dart';
+import 'package:authenticator/app/core/value_objects/user.dart';
 import 'package:authenticator/app/modules/sign_in/data/services/sign_in_service.dart';
 import 'package:authenticator/app/modules/sign_in/interactor/models/sign_in_model.dart';
 
@@ -20,7 +21,7 @@ abstract class _SignInMobxBase with Store {
   SignInModel signInModel = SignInModel.empty();
 
   @action
-  void setEmail(String user) {
+  void setUser(User user) {
     signInModel = signInModel.copyWith(
       user: user,
     );
