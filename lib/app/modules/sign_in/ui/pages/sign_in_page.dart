@@ -1,4 +1,5 @@
 import 'package:authenticator/app/core/services/launch/launch_service.dart';
+import 'package:authenticator/app/core/services/snack_bar/snack_bar.dart';
 import 'package:authenticator/app/core/themes/extensions/color_theme_extension.dart';
 import 'package:authenticator/app/core/themes/extensions/responsive_extension.dart';
 import 'package:authenticator/app/core/value_objects/password.dart';
@@ -29,6 +30,12 @@ class _SignInPageState extends State<SignInPage> {
   final passwordTextEditingController = TextEditingController();
   final userTextEditingController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.signInController.addListener(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                           state.status == SignInStateStatus.loading ||
                                   !widget.signInController.signInModel.isValid
                               ? () => setState(() {})
-                              : widget.signInController.doSignIn,
+                              : () => widget.signInController.doSignIn(context),
                     ),
                     const Expanded(child: SizedBox()),
                     Padding(

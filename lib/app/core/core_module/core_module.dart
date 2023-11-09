@@ -14,6 +14,9 @@ class CoreModule extends Module {
       () => Dio(
         BaseOptions(
           baseUrl: 'http://192.168.3.22:8080/',
+          contentType: "application/json",
+          connectTimeout: const Duration(seconds: 10),
+          receiveTimeout: const Duration(seconds: 10),
         ),
       ),
     );

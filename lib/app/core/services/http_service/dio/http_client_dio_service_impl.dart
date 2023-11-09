@@ -5,17 +5,16 @@ import 'package:dio/dio.dart';
 
 import 'package:flutter/foundation.dart';
 
-
 import '../http_client_service.dart';
 import '../http_response.dart';
 
 class HttpClientDioServiceImpl extends HttpClientService with HttpServiceMixin {
   final Dio dio;
- // final InternetConnectionService internetConnectionService;
+  // final InternetConnectionService internetConnectionService;
 
   HttpClientDioServiceImpl({
     required this.dio,
-   // required this.internetConnectionService,
+    // required this.internetConnectionService,
   }) {
     if (kDebugMode) {
       dio.interceptors.add(LoggerErrorInterceptor());
@@ -62,7 +61,7 @@ class HttpClientDioServiceImpl extends HttpClientService with HttpServiceMixin {
     final Map<String, dynamic>? body,
   }) async {
     try {
-    //  await throwErrorIfNotConnectionWithInternet(internetConnectionService);
+      //  await throwErrorIfNotConnectionWithInternet(internetConnectionService);
 
       final response = await dio.delete(
         url,
@@ -96,7 +95,7 @@ class HttpClientDioServiceImpl extends HttpClientService with HttpServiceMixin {
     final Map<String, dynamic>? body,
   }) async {
     try {
-    //  await throwErrorIfNotConnectionWithInternet(internetConnectionService);
+      //  await throwErrorIfNotConnectionWithInternet(internetConnectionService);
 
       final response = await dio.post(
         url,
@@ -115,10 +114,38 @@ class HttpClientDioServiceImpl extends HttpClientService with HttpServiceMixin {
         data: data,
       );
     } on DioException catch (exception) {
-      throw HttpException(
-        exception.message ?? 'Ops! Algo deu errado.',
-        stackTrace: exception.stackTrace,
-      );
+      switch (exception.response?.statusCode ?? 0) {
+        case 401:
+          throw HttpException(
+            'Autorização Necessária',
+            stackTrace: exception.stackTrace,
+          );
+        case 403:
+          throw HttpException(
+            'A senha ou o usuario está incorreta',
+            stackTrace: exception.stackTrace,
+          );
+        case 404:
+          throw HttpException(
+            exception.message ?? 'Ops! Algo deu errado.',
+            stackTrace: exception.stackTrace,
+          );
+        case 409:
+          throw HttpException(
+            exception.message ?? 'Ops! Algo deu errado.',
+            stackTrace: exception.stackTrace,
+          );
+        case 500:
+          throw HttpException(
+            exception.message ?? 'Ops! Algo deu errado.',
+            stackTrace: exception.stackTrace,
+          );
+        default:
+          throw HttpException(
+            'Ops! Algo deu errado.',
+            stackTrace: exception.stackTrace,
+          );
+      }
     }
   }
 
@@ -130,7 +157,7 @@ class HttpClientDioServiceImpl extends HttpClientService with HttpServiceMixin {
     final Map<String, dynamic>? body,
   }) async {
     try {
-     // await throwErrorIfNotConnectionWithInternet(internetConnectionService);
+      // await throwErrorIfNotConnectionWithInternet(internetConnectionService);
 
       final response = await dio.put(
         url,

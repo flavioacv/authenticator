@@ -22,9 +22,6 @@ class SignInServiceImpl implements SignInService {
       final response = await _httpClientService.post(
         '/auth',
         body: signInModel.toMap(),
-        headers: {
-          'Content-Type': 'application/json',
-        },
       );
 
       await _localStorageService.setString(

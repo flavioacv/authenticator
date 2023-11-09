@@ -54,7 +54,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   void didUpdateWidget(covariant TextFieldWidget oldWidget) {
-    // TODO: implement didUpdateWidget
     if (!isUserInteraction) {
       setState(() {
         isUserInteraction = true;
