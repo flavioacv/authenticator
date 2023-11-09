@@ -1,5 +1,6 @@
 import 'package:authenticator/app/core/services/http_service/dio/http_client_dio_service_impl.dart';
 import 'package:authenticator/app/core/services/http_service/http_client_service.dart';
+import 'package:authenticator/app/core/services/launch/launch_service.dart';
 import 'package:authenticator/app/core/services/local_storage/local_storage_service.dart';
 import 'package:authenticator/app/core/services/local_storage/local_storage_service_impl.dart';
 import 'package:dio/dio.dart';
@@ -16,9 +17,8 @@ class CoreModule extends Module {
         ),
       ),
     );
-
     i.add<LocalStorageService>(LocalStorageServiceImpl.new);
-
     i.add<HttpClientService>(HttpClientDioServiceImpl.new);
+    i.add<LaunchService>(LaunchServiceImpl.new);
   }
 }
