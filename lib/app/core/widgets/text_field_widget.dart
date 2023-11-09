@@ -16,6 +16,10 @@ class TextFieldWidget extends StatefulWidget {
   final Color? colorHintText;
   final double? fontSizeHintText;
   final Widget? prefixIcon;
+  final bool? autofocus;
+  final TextInputAction? textInputAction;
+  final void Function(String)? onFieldSubmitted;
+  final FocusNode? focusNode;
 
   const TextFieldWidget({
     super.key,
@@ -29,6 +33,10 @@ class TextFieldWidget extends StatefulWidget {
     this.colorHintText,
     this.fontSizeHintText,
     this.prefixIcon,
+    this.autofocus = false,
+    this.textInputAction,
+    this.onFieldSubmitted,
+    this.focusNode,
   });
 
   @override
@@ -84,6 +92,10 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         SizedBox(
           width: context.screenSize.width,
           child: TextFormField(
+            focusNode: widget.focusNode,
+            onFieldSubmitted: widget.onFieldSubmitted,
+            textInputAction: widget.textInputAction,
+            autofocus: widget.autofocus!,
             controller: widget.controller,
             textAlign: widget.textAlign,
             onChanged: widget.onChanged,

@@ -37,7 +37,7 @@ abstract class _SignInMobxBase with Store {
     );
   }
 
-  Future<void> doSignIn(BuildContext context) async {
+  Future<void> doSignIn() async {
     state = state.copyWith(status: SignInStateStatus.loading);
 
     final stateRes = await signInService.doSignIn(signInModel);

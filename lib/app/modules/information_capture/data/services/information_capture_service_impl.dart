@@ -1,19 +1,54 @@
+import 'dart:convert';
 
-import 'package:authenticator/app/core/services/http_service/http_client_service.dart';
+import 'package:authenticator/app/core/exception/app_exception.dart';
+
 import 'package:authenticator/app/core/services/local_storage/local_storage_service.dart';
-
+import 'package:authenticator/app/modules/information_capture/interactor/state/information_capture_state.dart';
 
 import 'information_capture_service.dart';
 
 class InformationCaptureServiceImpl implements InformationCaptureService {
-  final HttpClientService _httpClientService;
   final LocalStorageService _localStorageService;
 
   const InformationCaptureServiceImpl({
-    required HttpClientService httpClientService,
     required LocalStorageService localStorageService,
-  })  : _httpClientService = httpClientService,
-        _localStorageService = localStorageService;
+  }) : _localStorageService = localStorageService;
+
+  @override
+  Future<InformationCaptureState> getList() async {
+    try {
+      final List<String>? response = await _localStorageService.getListString(
+        'list',
+      );
+      return InformationCaptureState(
+        status: InformationCaptureStateStatus.sucess,
+        list: response ?? [],
+      );
+    } on AppException catch (error) {
+      return InformationCaptureState(
+        status: InformationCaptureStateStatus.error,
+        appException: error,
+      );
+    }
+  }
+
+  @override
+  Future<InformationCaptureState> saveList(List<String> list) async {
+    try {
+      await _localStorageService.setListString(
+        'list',
+        list,
+      );
+      return InformationCaptureState(
+        status: InformationCaptureStateStatus.sucess,
+      );
+    } on AppException catch (error) {
+      return InformationCaptureState(
+        status: InformationCaptureStateStatus.error,
+        appException: error,
+      );
+    }
+  }
 
   // @override
   // Future<SignInState> doSignIn(SignInModel signInModel) async {

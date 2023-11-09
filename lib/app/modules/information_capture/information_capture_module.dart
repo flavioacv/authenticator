@@ -18,7 +18,7 @@ class InformationCaptureModule extends Module {
   void routes(RouteManager r) {
     r.child('/', child: (context) {
       return InformationCapturePage(
-        informationCaptureMobx: Modular.get<InformationCaptureMobx>(),
+        informationCaptureController: Modular.get<InformationCaptureMobx>(),
         launchService: Modular.get<LaunchService>(),
       );
     });

@@ -8,14 +8,13 @@ class LocalStorageServiceImpl implements LocalStorageService {
   Future<String?> getString(String key) async {
     var sharedPreferences = await SharedPreferences.getInstance();
     try {
-      sharedPreferences.getString(key);
+      return sharedPreferences.getString(key);
     } catch (e, stackTrace) {
       throw LocalStorageException(
         message: e.toString(),
         stackTrace: stackTrace,
       );
     }
-    return null;
   }
 
   @override
@@ -36,6 +35,32 @@ class LocalStorageServiceImpl implements LocalStorageService {
     var sharedPreferences = await SharedPreferences.getInstance();
     try {
       await sharedPreferences.setString(key, value);
+    } catch (e, stackTrace) {
+      throw LocalStorageException(
+        message: e.toString(),
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  @override
+  Future<List<String>?> getListString(String key) async {
+    var sharedPreferences = await SharedPreferences.getInstance();
+    try {
+      return sharedPreferences.getStringList(key);
+    } catch (e, stackTrace) {
+      throw LocalStorageException(
+        message: e.toString(),
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  @override
+  Future<void> setListString(String key, List<String> value) async {
+    var sharedPreferences = await SharedPreferences.getInstance();
+    try {
+      await sharedPreferences.setStringList(key, value);
     } catch (e, stackTrace) {
       throw LocalStorageException(
         message: e.toString(),

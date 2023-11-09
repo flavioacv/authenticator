@@ -10,29 +10,27 @@ enum InformationCaptureStateStatus {
 
 class InformationCaptureState {
   final InformationCaptureStateStatus status;
-  final SignInModel? signInModel;
+  final List<String>? list;
   final AppException? appException;
 
   InformationCaptureState.initial()
-      : this(
-            status: InformationCaptureStateStatus.initial,
-            signInModel: SignInModel.empty());
+      : this(status: InformationCaptureStateStatus.initial, list: []);
 
   InformationCaptureState({
     required this.status,
     this.appException,
-    this.signInModel,
+    this.list,
   });
 
   InformationCaptureState copyWith({
     InformationCaptureStateStatus? status,
     AppException? appException,
-    SignInModel? signInModel,
+    List<String>? list,
   }) {
     return InformationCaptureState(
       status: status ?? this.status,
       appException: appException ?? this.appException,
-      signInModel: signInModel ?? this.signInModel,
+      list: list ?? this.list,
     );
   }
 }

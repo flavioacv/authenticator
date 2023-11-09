@@ -83,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                           state.status == SignInStateStatus.loading ||
                                   !widget.signInController.signInModel.isValid
                               ? () => setState(() {})
-                              : () => widget.signInController.doSignIn(context),
+                              : () => widget.signInController.doSignIn(),
                     ),
                     const Expanded(child: SizedBox()),
                     Padding(
