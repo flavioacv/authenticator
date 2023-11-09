@@ -6,7 +6,7 @@ class Password {
 
   bool get hasSpecialDigit => RegExp(r'^[a-zA-Z0-9]+$').hasMatch(_value);
 
-  bool get hasNoWhitespace => !_value.contains(' ');
+  bool get hasNoWhitespace => !_value[_value.length - 1].contains(' ');
 
   String? get isValidPassword {
     if (_value.length < 2) {

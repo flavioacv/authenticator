@@ -7,15 +7,15 @@ class User {
 
   const User(this._value);
 
-  bool get hasNoWhitespace => !_value.contains(' ');
+  bool get hasNoWhitespace => !_value[_value.length - 1].contains(' ');
 
   String? get isValidUser {
     if (_value.isEmpty) {
       return 'Campo obrigatório';
     } else if (!hasNoWhitespace) {
-      return 'A senha não deve ter espaços em branco';
+      return 'A user não deve ter espaços em branco no final';
     } else if (_value.length > 20) {
-      return 'A senha deve ter no maximo 20 caracteres';
+      return 'A user deve ter no maximo 20 caracteres';
     } else {
       return null;
     }

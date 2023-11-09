@@ -109,10 +109,17 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               isDense: true,
               filled: true,
               fillColor: context.appColors.white,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.w),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 1.w,
+                ),
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.w),
                 borderSide: BorderSide(
-                  color: context.appColors.black,
+                  color: Colors.transparent,
                   width: 1.w,
                 ),
               ),
@@ -131,7 +138,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   padding: EdgeInsets.only(top: 6.0.h),
                   child: TextWidget(
                     widget.validator?.call(widget.controller.text) ?? '',
-                    colorText: context.appColors.black,
+                    colorText: Colors.black,
                     fontSize: 12.p,
                   ),
                 ),
