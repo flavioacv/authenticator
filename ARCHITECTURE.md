@@ -10,7 +10,7 @@ Já o Cubit é uma abordagem que tem como objetivo facilitar a implementação d
 
 No geral, a utilização da Clean Architecture, dos princípios SOLID e do Cubit para simplificação do Bloc é uma abordagem que tem trazido excelentes resultados para a equipe de desenvolvimento. Essas práticas garantem a qualidade e a manutenibilidade do código, além de facilitar a implementação de testes automatizados e tornar o sistema mais flexível e escalável.
 
-obs: Foi utilizado a nova proposta do clean dart 2.0.
+obs: Foi utilizado a nova proposta do [Clean Dart 2.0](https://github.com/Flutterando/Clean-Dart/tree/2.0).
 
 # Objetivo
 
