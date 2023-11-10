@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:authenticator/app/core/exception/app_exception.dart';
 

@@ -1,5 +1,4 @@
 import 'package:authenticator/app/core/services/launch/launch_service.dart';
-import 'package:authenticator/app/core/services/snack_bar/snack_bar.dart';
 import 'package:authenticator/app/core/themes/extensions/color_theme_extension.dart';
 import 'package:authenticator/app/core/themes/extensions/responsive_extension.dart';
 import 'package:authenticator/app/core/value_objects/password.dart';
